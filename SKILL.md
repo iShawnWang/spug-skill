@@ -7,6 +7,29 @@ description: Use this skill when you need to log into a Spug deployment platform
 
 This skill provides a zero-runtime-dependency TypeScript CLI for Spug.
 
+## Initialization (Required Before First Action)
+
+Before running any command, ask the user to provide:
+
+1. Spug login `username`
+2. Spug login `password`
+3. Spug local deployment `ip`
+4. Spug local deployment `port`
+
+Question template:
+
+- 请提供 Spug 登录用户名
+- 请提供 Spug 登录密码
+- 请提供 Spug 本地部署 IP
+- 请提供 Spug 本地部署端口（例如 `80`、`443`、`8001`）
+
+Base URL construction rule:
+
+- If the user does not provide a full URL, construct `--base-url` as `http://<ip>:<port>`.
+- If the port is `443`, prefer `https://<ip>` unless the user explicitly says HTTP.
+- If the user already provides full `http://` or `https://` URL, use it directly.
+- Do not execute deployment commands until all four initialization fields are confirmed.
+
 ## Runtime
 
 - Node `20+`
